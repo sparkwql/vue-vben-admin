@@ -13,15 +13,12 @@ export function getColumns(): BasicColumn[] {
       width: 80,
       customRender: ({ text }) => {
         const color =
-          text === ErrorTypeEnum.VUE
-            ? 'green'
-            : text === ErrorTypeEnum.RESOURCE
-            ? 'cyan'
-            : text === ErrorTypeEnum.PROMISE
-            ? 'blue'
-            : ErrorTypeEnum.AJAX
-            ? 'red'
-            : 'purple';
+          {
+            [ErrorTypeEnum.VUE]: 'green',
+            [ErrorTypeEnum.RESOURCE]: 'cyan',
+            [ErrorTypeEnum.PROMISE]: 'blue',
+            [ErrorTypeEnum.AJAX]: 'red',
+          }[text] || 'purple';
         return <Tag color={color}>{() => text}</Tag>;
       },
     },

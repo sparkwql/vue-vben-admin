@@ -10,7 +10,7 @@ import { router } from '/@/router';
 import { PermissionModeEnum } from '/@/enums/appEnum';
 import { pathToRegexp } from 'path-to-regexp';
 
-const modules = import.meta.globEager('./modules/**/*.ts');
+const modules = import.meta.globEager('./smart/**/*.ts');
 
 const menuModules: MenuModule[] = [];
 
@@ -19,7 +19,6 @@ Object.keys(modules).forEach((key) => {
   const modList = Array.isArray(mod) ? [...mod] : [mod];
   menuModules.push(...modList);
 });
-
 // ===========================
 // ==========Helper===========
 // ===========================

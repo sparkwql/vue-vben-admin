@@ -72,6 +72,7 @@
   const showLocale = localeStore.getShowPicker;
   const title = computed(() => globSetting?.title ?? '');
 </script>
+
 <style lang="less">
   @prefix-cls: ~'@{namespace}-login';
   @logo-prefix-cls: ~'@{namespace}-app-logo';

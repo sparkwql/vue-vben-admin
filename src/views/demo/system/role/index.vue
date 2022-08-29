@@ -43,7 +43,7 @@
     setup() {
       const [registerDrawer, { openDrawer }] = useDrawer();
       const [registerTable, { reload }] = useTable({
-        title: '角色列表',
+        title: 'Role List',
         api: getRoleListByPage,
         columns,
         formConfig: {
@@ -51,15 +51,15 @@
           schemas: searchFormSchema,
         },
         useSearchForm: true,
-        showTableSetting: true,
-        bordered: true,
+        showTableSetting: false,
+        bordered: false,
         showIndexColumn: false,
         actionColumn: {
           width: 80,
           title: '操作',
           dataIndex: 'action',
           slots: { customRender: 'action' },
-          fixed: undefined,
+          fixed: 'right',
         },
       });
 
