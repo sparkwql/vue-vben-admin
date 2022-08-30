@@ -17,10 +17,6 @@
             },
             {
               label: '概览',
-              popConfirm: {
-                title: '是否确认删除',
-                confirm: handleDelete.bind(null, record),
-              },
             },
           ]"
         />
@@ -31,14 +27,12 @@
 <script lang="ts">
   import { defineComponent, reactive } from 'vue';
   import { BasicTable, TableAction, useTable } from '/@/components/Table';
-  import { useGo } from '/@/hooks/web/usePage';
   import { useModal } from '/@/components/Modal';
   import { columns, searchFormSchema } from './decision.data';
   import { getDecisionPlanList } from '/@/api/smart/decision';
   export default defineComponent({
     components: { BasicTable, TableAction },
     setup() {
-      const go = useGo();
       const [registerModal, { openModal }] = useModal();
       const searchInfo = reactive<Recordable>({});
       const [registerTable, { reload, updateTableDataRecord }] = useTable({
@@ -74,10 +68,10 @@
 
       function handleEdit(record: Recordable) {
         console.log(record);
-        openModal(true, {
-          record,
-          isUpdate: true,
-        });
+        // openModal(true, {
+        //   record,
+        //   isUpdate: true,
+        // });
       }
 
       function handleDelete(record: Recordable) {
@@ -101,7 +95,8 @@
       }
 
       function handleView(record: Recordable) {
-        go('/system/account_detail/' + record.id);
+        console.log(record);
+        // go('/system/account_detail/' + record.id);
       }
 
       return {

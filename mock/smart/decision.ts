@@ -97,7 +97,7 @@ const planList = [
 
 const capacityList = () => {
   const result: any[] = [];
-  for (let index = 0; index < 10; index++) {
+  for (let index = 0; index < 9; index++) {
     result.push({
       id: `${index}`,
       metric: [

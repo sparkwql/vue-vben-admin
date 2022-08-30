@@ -14,6 +14,8 @@
     <Boundary v-if="curItem === '1'" />
     <Capacity v-if="curItem === '2'" />
     <Sensitive v-if="curItem === '3'" />
+    <Scale v-if="curItem === '4'" />
+    <Scale v-if="curItem === '5'" />
   </div>
 </template>
 <script lang="ts">
@@ -24,12 +26,14 @@
   import Boundary from '/@/views/smart/decisions/Boundary.vue';
   import Capacity from '/@/views/smart/decisions/Capacity.vue';
   import Sensitive from '/@/views/smart/decisions/Sensitive.vue';
+  import Scale from '/@/views/smart/decisions/Scale.vue';
   export default defineComponent({
     name: 'AccountManagement',
     components: {
       Boundary,
       Capacity,
       Sensitive,
+      Scale,
     },
     setup() {
       const list = reactive<any>(subMenuData);

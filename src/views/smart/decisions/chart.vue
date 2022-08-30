@@ -23,6 +23,12 @@
       tooltip: {
         trigger: 'axis',
       },
+      legend: {
+        top: 40,
+        right: 0,
+        width: 100,
+        orient: 'horizontal',
+      },
       xAxis: {
         type: 'category',
         boundaryGap: false,
@@ -37,6 +43,11 @@
         },
         axisTick: {
           show: false,
+        },
+        axisLabel: {
+          formatter: function (val) {
+            return val + '%';
+          },
         },
       },
       yAxis: [
@@ -56,25 +67,19 @@
           },
         },
       ],
-      grid: { left: '1%', right: '1%', top: '2  %', bottom: 0, containLabel: true },
+      grid: { left: '1%', right: '15%', top: '2  %', bottom: 0, containLabel: true },
       series: [
         {
           smooth: false,
           name: '单因素-因变量1',
           data: [11, 22, 40, 60, 80, 90],
           type: 'line',
-          // itemStyle: {
-          //   color: '#5ab1ef',
-          // },
         },
         {
           smooth: false,
           name: '单因素-因变量2',
           data: [20, 30, 40, 70, 85, 95],
           type: 'line',
-          // itemStyle: {
-          //   color: '#019680',
-          // },
         },
         {
           smooth: false,

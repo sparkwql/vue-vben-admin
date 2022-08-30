@@ -148,14 +148,8 @@ export const sensitiveColumns: BasicColumn[] = [
 ];
 export const searchFormSchema: FormSchema[] = [
   {
-    field: 'account',
-    label: '用户名',
-    component: 'Input',
-    colProps: { span: 8 },
-  },
-  {
-    field: 'nickname',
-    label: '昵称',
+    field: 'metric',
+    label: '指标名称',
     component: 'Input',
     colProps: { span: 8 },
   },

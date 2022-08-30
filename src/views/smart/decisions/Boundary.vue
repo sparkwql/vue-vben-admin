@@ -1,9 +1,15 @@
 <template>
-  <PageWrapper dense contentFullHeight fixedHeight contentClass="flex">
+  <PageWrapper dense contentFullHeight contentClass="flex">
     <DeptTree class="w-1/4 xl:w-1/5" @select="handleSelect" />
-    <BasicTable @register="registerTable" class="w-3/4 xl:w-4/5" :searchInfo="searchInfo">
+    <BasicTable
+      size="small"
+      @register="registerTable"
+      class="w-3/4 xl:w-4/5 p-4"
+      :searchInfo="searchInfo"
+    >
       <template #toolbar>
-        <a-button type="primary" @click="handleCreate">新增账号</a-button>
+        <a-button type="primary" @click="handleCreate" size="small">计算</a-button>
+        <a-button type="primary" @click="handleCreate" size="small">保存</a-button>
       </template>
     </BasicTable>
   </PageWrapper>
@@ -22,14 +28,14 @@
   import { getBoundaryList } from '/@/api/smart/decision';
 
   export default defineComponent({
-    name: 'AccountManagement',
+    name: 'Boundary',
     components: { BasicTable, PageWrapper, DeptTree },
     setup() {
       const go = useGo();
       const [registerModal, { openModal }] = useModal();
       const searchInfo = reactive<Recordable>({});
       const [registerTable, { reload, updateTableDataRecord }] = useTable({
-        title: '账号列表',
+        title: '',
         api: getBoundaryList,
         rowKey: 'id',
         columns: boundaryColumns,
@@ -38,8 +44,8 @@
           schemas: searchFormSchema,
           autoSubmitOnEnter: true,
         },
-        useSearchForm: true,
-        showTableSetting: true,
+        useSearchForm: false,
+        showTableSetting: false,
         bordered: true,
         handleSearchInfoFn(info) {
           console.log('handleSearchInfoFn', info);

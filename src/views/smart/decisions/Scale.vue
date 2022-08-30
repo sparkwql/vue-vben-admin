@@ -1,48 +1,51 @@
 <template>
-  <PageWrapper dense contentFullHeight contentClass="flex">
-    <SensitiveSide class="w-1/4 xl:w-1/5" @select="handleSelect" />
-    <div class="w-3/4 xl:w-4/5 p-4">
-      分析因素数量：<Select :options="options" allowClear style="width: 200px" />
-      <Card><Chart /></Card>
-      <BasicTable @register="registerTable" size="small" />
-    </div>
+  <PageWrapper dense contentFullHeight>
+    <BasicTable @register="registerTable" :searchInfo="searchInfo" class="p-4" />
   </PageWrapper>
 </template>
 <script lang="ts">
-  import { defineComponent, reactive, ref } from 'vue';
-  import { Card } from 'ant-design-vue';
+  import { defineComponent, reactive } from 'vue';
+
   import { BasicTable, useTable } from '/@/components/Table';
   import { PageWrapper } from '/@/components/Page';
-  import SensitiveSide from '/@/views/smart/decisions/SensitiveSide.vue';
+
   import { useModal } from '/@/components/Modal';
-  import Chart from './chart.vue';
-  import { sensitiveColumns, searchFormSchema } from './guide.data';
+
+  import { boundaryColumns, searchFormSchema } from './guide.data';
   import { useGo } from '/@/hooks/web/usePage';
-  import { getSensitiveList } from '/@/api/smart/decision';
-  import { Select } from 'ant-design-vue';
+  import { getBoundaryList } from '/@/api/smart/decision';
 
   export default defineComponent({
-    name: 'AccountManagement',
-    components: { BasicTable, PageWrapper, SensitiveSide, Chart, Card, Select },
+    name: 'Scale',
+    components: { BasicTable, PageWrapper },
     setup() {
       const go = useGo();
       const [registerModal, { openModal }] = useModal();
       const searchInfo = reactive<Recordable>({});
       const [registerTable, { reload, updateTableDataRecord }] = useTable({
-        title: '',
-        api: getSensitiveList,
+        title: '请选择待确定的投资能力结果',
+        api: getBoundaryList,
         rowKey: 'id',
-        columns: sensitiveColumns,
+        columns: boundaryColumns,
         formConfig: {
           labelWidth: 120,
           schemas: searchFormSchema,
           autoSubmitOnEnter: true,
         },
-        isCanResizeParent: false,
         useSearchForm: false,
         showTableSetting: false,
-        bordered: false,
+        bordered: true,
+        handleSearchInfoFn(info) {
+          console.log('handleSearchInfoFn', info);
+          return info;
+        },
       });
+
+      function handleCreate() {
+        openModal(true, {
+          isUpdate: false,
+        });
+      }
 
       function handleEdit(record: Recordable) {
         console.log(record);
@@ -76,19 +79,16 @@
         go('/system/account_detail/' + record.id);
       }
 
-      const options = ref<Recordable[]>([]);
-      for (let i = 1; i < 10; i++) options.value.push({ label: '选项' + i, value: `${i}` });
-
       return {
         registerTable,
         registerModal,
+        handleCreate,
         handleEdit,
         handleDelete,
         handleSuccess,
         handleSelect,
         handleView,
         searchInfo,
-        options,
       };
     },
   });

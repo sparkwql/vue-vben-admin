@@ -1,5 +1,12 @@
 <template>
-  <BasicTable @register="registerTable" />
+  <BasicTable @register="registerTable" class="p-4" size="small">
+    <template #toolbar>
+      <a-button type="primary" size="small">计算</a-button>
+      <a-button type="primary" size="small">保存</a-button>
+      <a-button type="primary" size="small">趋势分析</a-button>
+      <a-button type="primary" size="small">导出</a-button>
+    </template>
+  </BasicTable>
 </template>
 <script lang="ts">
   import { defineComponent } from 'vue';
@@ -19,7 +26,7 @@
           labelWidth: 120,
           schemas: searchFormSchema,
         },
-        useSearchForm: true,
+        useSearchForm: false,
         showTableSetting: false,
         bordered: false,
         showIndexColumn: false,

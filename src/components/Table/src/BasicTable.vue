@@ -231,6 +231,7 @@
       const { getFormProps, replaceFormSlotKey, getFormSlotKeys, handleSearchInfoChange } =
         useTableForm(getProps, slots, fetch, getLoading);
 
+      console.log(getFormSlotKeys);
       const getBindValues = computed(() => {
         const dataSource = unref(getDataSourceRef);
         let propsData: Recordable = {
